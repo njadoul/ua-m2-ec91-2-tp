@@ -9,6 +9,9 @@
 ********************************************************/
 
 
+
+
+
 ////////////////// - Paramètres de la boite - Box parameters - //////////////////////
 
 //Panneau arrière - Back panel  
@@ -20,11 +23,11 @@ PHolder=1; // [0:No, 1:Yes]
 //demi Coque - Half shell
 BShell=1;// [0:No, 1:Yes]
 //Coque haut - Top shell
-TShell=0;// [0:No, 1:Yes]
+TShell=1;// [0:No, 1:Yes]
 //Texte façade - Front text
 Text=1;// [0:No, 1:Yes]
 //Holes in box [0:No, 1:Yes]
-Holes=1;
+Holes=0;
 // Vertical lines as holes [0:No, 1:Yes]
 VHoles=1;
 //Hole Wdt in box [1=1mm 3=3mm]
@@ -33,8 +36,8 @@ Holewdt=1;
 PCBFix=1;
 // PCB Heigh over box bottom
 PCBHight=10;
-PCBLength=44.2;
-PCBWidth=44.2;
+PCBLength=56;
+PCBWidth=103;
  // material sickness
 PCBThick=1.6;
 
@@ -48,11 +51,11 @@ ShowPCB=1;
 // - Font  
   Police="Arial Black"; 
 // - Longueur - Length  
-  Length = 80;       
+  Length = 85;       
 // - Largeur - Width
-  Width = 60;                     
+  Width = 110;                     
 // - Hauteur - Height  
-  Height = 30;                                       
+  Height = 45;                                       
 // - Diamètre Coin arrondi - Round corner diameter  
   Round = 2;//[0.1:12] 
 // - lissage de l'arrondi - Round smoothness  
@@ -227,27 +230,27 @@ module Coque(){//Coque - Shell
                 }  
             }
 
-        union(){// outbox sides decorations
-            for(i=[0:Thick:Length/4]){
+        //union(){// outbox sides decorations
+            //for(i=[0:Thick:Length/4]){
 
-                translate([(Length-10) - i,-Thick+0.6,0]){
-                    cube([Holewdt,Thick*(VHoles+1),Height/4]);
-                    }
+                //translate([(Length-10) - i,-Thick+0.6,0]){
+                   // cube([Holewdt,Thick*(VHoles+1),Height/4]);
+                   // }
                     
-                translate([10+i,-Thick+0.6,0]){
-                    cube([Holewdt,Thick*(VHoles+1),Height/4]);
-                    }    
+              //  translate([10+i,-Thick+0.6,0]){
+               //     cube([Holewdt,Thick*(VHoles+1),Height/4]);
+                 //   }    
                     
-                translate([10+i,Width-0.6+(VHoles*(-2)),0]){
-                    cube([Holewdt,Thick,Height/4]);
-                    } 
+               // translate([10+i,Width-0.6+(VHoles*(-2)),0]){
+                  //  cube([Holewdt,Thick,Height/4]);
+                 //   } 
                     
-                translate([(Length-10) - i,Width-0.6+(VHoles*(-2)),0]){
-                    cube([Holewdt,Thick,Height/4]);
-                    }    
+             //   translate([(Length-10) - i,Width-0.6+(VHoles*(-2)),0]){
+                 //   cube([Holewdt,Thick,Height/4]);
+                 //   }    
                 
-                    }// fin de for
-                }//fin union decoration
+                 //   }// fin de for
+            //    }//fin union decoration
             }//fin difference decoration
 
 
@@ -354,8 +357,13 @@ if(TShell==1)
 color( Couleur2,2){
     translate([0,Width,Height+0.2]){
         rotate([0,180,180]){
+            difference() {
                 Coque();
+                translate([32,20,-6]){
+                    cube([25,23,9]);
+                    }
                 }
+            }
         }
 }
 
